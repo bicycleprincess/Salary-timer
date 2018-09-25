@@ -7,7 +7,7 @@ import argparse
 def tick(time1=''):
 	#time2 = time.strftime('%I:%M:%S')
 	time2 = time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
-	#print time2[:3]
+	#print time2[:3]€
 	if time2 != time1:
 		time1 = time2
 		#clock_frame.config(text=time2)
@@ -21,3 +21,4 @@ clock_frame.pack(fill='both', expand=1)
 root.geometry('800x500')
 tick()
 root.mainloop()
+
