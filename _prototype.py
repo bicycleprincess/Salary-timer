@@ -37,9 +37,6 @@ def make_frame(text):
 	clock_frame = tk.Label(root, font=('times', 50, 'bold'), bg='black', fg='green')
 	clock_frame.pack(fill='both', expand=1)
 	root.geometry('800x500')
-	#tick()
-
-	#root.mainloop()
 	return root
 
 if __name__ == '__main__':
