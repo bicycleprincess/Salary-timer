@@ -1,3 +1,0 @@
-03062019 
-"If you have HomeBrew, MacPorts, or Fink installed, you must remove all traces of them from your environment before you try to run jhbuild. The easiest way is to create a new user and run jhbuild while logged in as that user. Mixing HomeBrew, MacPorts, or Fink and GTK-OSX will fail"
--- FUCK!!!
