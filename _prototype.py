@@ -42,6 +42,6 @@ def make_frame(text):
 if __name__ == '__main__':
 	info = get_val()
 	print info
-	screen = screen()
+	#screen = screen()
 	tick(info)
 	screen.mainloop()
