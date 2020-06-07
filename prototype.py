@@ -28,7 +28,8 @@ class App(object):
 			self.days = 31
 		else:
 			if time.localtime(now)[1] == 2:
-				if ((time.localtime(now)[0] % 4 == 0 and time.localtime(now)[0] % 100 != 0) or (time.localtime(now)[0] % 400 == 0 and time.localtime(now)[0] % 3200 != 0)):
+				#if ((time.localtime(now)[0] % 4 == 0 and time.localtime(now)[0] % 100 != 0) or (time.localtime(now)[0] % 400 == 0 and time.localtime(now)[0] % 3200 != 0)):
+				if ((time.localtime(now)[0] % 4 == 0 and time.localtime(now)[0] % 100 != 0) or time.localtime(now)[0] % 400 == 0:
 					self.days = 29
 				else:
 					self.days = 28

@@ -18,31 +18,21 @@ print(current_year as Any, current_month as Any)
 var days = Int()
 
 
-// find the days of month --> so ugly....
+// find the days of month --> so ugly.... :-/
 if current_month == 2 {
-	if current_year! % 4 == 0 {
-		if current_year! % 100 == 0 {
-			if current_year! % 400 == 0{
-				days = 29
-				}else{
-					days = 28
-				}
-			}else {
-				days = 29
-			}
-		} else {
-			days = 28
-		}
+	if ((current_year! % 4 == 0) && (current_year! % 100 != 0) || (current_year! % 400 == 0)) {
+		days = 29
+	}else {
+		days = 28
+	}
 }else {
 	if month.contains(where:{$0==current_month}) {
-		//print("yes")
 		days = 31
 	}else {
-	//print("no")
 		days = 30
 	}
 }
-print(days)
+//print(days)
 
 // time for compairsion and saving
 let currentTimeInSecond = NSDate().timeIntervalSince1970
