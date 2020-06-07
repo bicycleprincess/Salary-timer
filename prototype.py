@@ -1,18 +1,19 @@
 import argparse
 import time
 import sys
-import Tkinter as tk
+import os
+import tkinter as tk
 
 
 ODD = [1, 3, 5, 7, 8, 10, 12]
 
-PATH = u'/Users/yangwei/ENV/iphone_app/'
+sys.path.append(os.path.realpath('..'))
 
 class App(object):
 
 	def __init__(self):
 
-		self.f = open(PATH +'log.txt', 'r+')
+		self.f = open('log.txt', 'r+')
 		self.first_line = self.f.readline()
 		self.alist = self.first_line.split()
 		self.before, self.base, self.hours = float(self.alist[0]), float(self.alist[1]), float(self.alist[2])
@@ -48,10 +49,8 @@ class App(object):
 	def get_time(self):
 		now = time.time()
 		if now:
-			#self.base += self.sigle * (now - self.before)
 			self.base += self.sigle
 			self._base = self.base
-			#print self.base
 		self.clock_frame.config(text=("%.3f" % self.base))
 		self.clock_frame.after(1000, self.get_time)
 
