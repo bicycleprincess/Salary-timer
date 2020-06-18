@@ -1,4 +1,3 @@
-// read time
 import Foundation
 import Cocoa
 
@@ -14,7 +13,7 @@ dateFormatter.dateFormat = "yyyy-MM"
 var today = dateFormatter.string(from:currentTime as Date)
 var current_year = Int(today.prefix(4))
 var current_month = Int(today.suffix(2))
-print(current_year as Any, current_month as Any)
+//print(current_year as Any, current_month as Any)
 var days = Int()
 
 
@@ -44,6 +43,7 @@ let currentTimeInSecond = NSDate().timeIntervalSince1970
 let fileManager = FileManager.default
 let txtPath = "/Users/yangwei/env/Swift/iphone_app/Sources/log.txt"
 let url = URL(fileURLWithPath: txtPath)
+//print(url.absoluteURL)
 
 // read file
 let text = try String(contentsOf: url, encoding: .utf8)
@@ -65,6 +65,12 @@ let saved_time = Double(saved_data[1])
 let saved_base = Double(saved_data[2])
 let saved_working_hour = Int(saved_data[3])
 print(saved_year as Any, saved_month as Any, saved_time as Any)
+
+if current_month != saved_month{
+	// TODO
+	// func updateBase()
+	print("any changes about your salary?")
+}
 
 
 //if currentTimeInSecond !== saved_time {
