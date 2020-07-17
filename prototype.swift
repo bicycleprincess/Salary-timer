@@ -17,7 +17,6 @@ var current_month = Int(today.suffix(2))
 var days = Int()
 
 
-// find the days of month --> so ugly.... :-/
 if current_month == 2 {
 	if ((current_year! % 4 == 0) && (current_year! % 100 != 0) || (current_year! % 400 == 0)) {
 		days = 29
@@ -73,13 +72,7 @@ if current_month != saved_month{
 }
 
 
-//if currentTimeInSecond !== saved_time {
-
-//}
-
 // write data into file
-
-
 var dataToWrite = "\(today):\(currentTimeInSecond):\(salary):\(40)"
 //print(dataToWrite)
 let data = Data(dataToWrite.utf8)
