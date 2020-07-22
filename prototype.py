@@ -16,7 +16,7 @@ class App():
         self.f = open('log.txt', 'r+')
         self.first_line = self.f.readline()
         self.alist = self.first_line.split()
-        self.before, self.base, self.hours = float(self.alist[0]), float(self.alist[1]), float(self.alist[2])
+        self.before, self.base, self.hours, self.salary, self.starter = float(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), str(self.alist[4])
         self.root = tk.Tk()
         self.root.title('Salary Counter')
         self.root.geometry('400x150')
@@ -34,7 +34,7 @@ class App():
             else:
                 self.days = 30
 
-        self.single = self.cal(2244.41, self.hours)
+        self.single = self.cal(self.salary, self.hours)
 
         if now != self.before:
             self.base += self.single * (now - self.before)
@@ -46,7 +46,10 @@ class App():
         return one_SEC_salary
 
     def get_time(self):
-        self.base += self.single
+        if time.time() - self.before > 0:
+            self.base += self.single
+        else:
+            self.base = 0
         self.clock_frame.config(text=("%.3f" % self.base))
         self.clock_frame.after(1000, self.get_time)
 
@@ -61,7 +64,7 @@ class App():
             except KeyboardInterrupt:
                 self.root.quit()
                 self.f.seek(0)
-                self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n")
+                self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n") + "2020-09-01"
                 self.f.close()
                 sys.exit(0)
 
