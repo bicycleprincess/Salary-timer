@@ -16,7 +16,10 @@ class App():
         self.f = open('log.txt', 'r+')
         self.first_line = self.f.readline()
         self.alist = self.first_line.split()
-        self.before, self.base, self.hours, self.salary, self.starter = float(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), str(self.alist[4])
+        
+        self.initial, self.before, self.base, self.hours, self.salary, self.starter = int(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), float(self.alist[4]), str(self.alist[5])
+        #self.before, self.base, self.hours, self.salary, self.starter = float(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), str(self.alist[4])#, str(self.alist[5])
+
         self.root = tk.Tk()
         self.root.title('Salary Counter')
         self.root.geometry('400x150')
@@ -39,6 +42,11 @@ class App():
         if now != self.before:
             self.base += self.single * (now - self.before)
 
+        if self.initial=='0':
+            hello()
+
+    def hello(self):
+        pass
 
     def cal(self, salary, week_working_hours):
 
@@ -64,9 +72,14 @@ class App():
             except KeyboardInterrupt:
                 self.root.quit()
                 self.f.seek(0)
-                self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n") + "2020-09-01"
+                self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n") + "2020-08-28"
                 self.f.close()
                 sys.exit(0)
+
+    def make_decision(self):
+        #TODO
+        #to remeber the running times and also the initial question for writting the file later
+        pass
 
 
 def get_val():
