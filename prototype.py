@@ -44,7 +44,10 @@ class App():
 
         if self.initial=='0':
             hello()
+        else:
+            make_decision()
 
+    # TODO
     def hello(self):
         pass
 
@@ -72,7 +75,7 @@ class App():
             except KeyboardInterrupt:
                 self.root.quit()
                 self.f.seek(0)
-                self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n") + "2020-08-28"
+                self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n") + "2020-09-01"
                 self.f.close()
                 sys.exit(0)
 

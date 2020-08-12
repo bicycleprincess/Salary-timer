@@ -55,8 +55,8 @@ let text = try String(contentsOf: url, encoding: .utf8)
 var salary:Double = 3550
 print(salary)
 
-
 print(text.split(separator:":"))
+
 let saved_data = text.split(separator:":")
 let saved_year = Int(saved_data[0].prefix(4))
 let saved_month = Int(saved_data[0].suffix(2))
