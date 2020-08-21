@@ -4,6 +4,8 @@ import sys
 import os
 import tkinter as tk
 
+from test import get_epoch_time
+
 
 ODD = [1, 3, 5, 7, 8, 10, 12]
 
@@ -15,41 +17,60 @@ class App():
 
         self.f = open('log.txt', 'r+')
         self.first_line = self.f.readline()
-        self.alist = self.first_line.split()
-        
-        self.initial, self.before, self.base, self.hours, self.salary, self.starter = int(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), float(self.alist[4]), str(self.alist[5])
-        #self.before, self.base, self.hours, self.salary, self.starter = float(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), str(self.alist[4])#, str(self.alist[5])
+        self.base = 0
+        self.days = self.get_days_in_month()
+        self.initial = 0
+        self.before = 0
+
+        if len(self.first_line) == 0:
+            self.hello()
+            self.initial = 1
+        else:
+            self.alist = self.first_line.split()            
+            self.initial, self.before, self.base, self.hours, self.salary, self.starter = int(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), float(self.alist[4]), str(self.alist[5])
+            self.single = self.cal(self.salary, self.hours)
+            self.ui_window()
+
+    def ui_window(self):
 
         self.root = tk.Tk()
         self.root.title('Salary Counter')
         self.root.geometry('400x150')
         self.clock_frame = tk.Label(self.root, font=('times', 50, 'bold'), bg='black', fg='white')
         self.clock_frame.pack(fill='both', expand=1)
-        now = time.time()
-        if time.localtime(now)[1] in ODD:
-            self.days = 31
+
+    def get_days_in_month(self):
+
+        self.now = time.time()
+
+        if time.localtime(self.now)[1] in ODD:
+            days = 31
         else:
-            if time.localtime(now)[1] == 2:
-                if (time.localtime(now)[0] % 4 == 0 and time.localtime(now)[0] % 100 != 0) or time.localtime(now)[0] % 400 == 0:
-                    self.days = 29
+            if time.localtime(self.now)[1] == 2:
+                if (time.localtime(self.now)[0] % 4 == 0 and time.localtime(self.now)[0] % 100 != 0) or time.localtime(self.now)[0] % 400 == 0:
+                    days = 29
                 else:
-                    self.days = 28
+                    days = 28
             else:
-                self.days = 30
+                days = 30
 
-        self.single = self.cal(self.salary, self.hours)
+        return days 
 
-        if now != self.before:
-            self.base += self.single * (now - self.before)
-
-        if self.initial=='0':
-            hello()
-        else:
-            make_decision()
-
-    # TODO
     def hello(self):
-        pass
+
+        salary = float(input('How much you earn monthly after tax?: '))
+        hours = int(input('How many hours you work monthly?: '))
+        print("When do you offically start your job?")
+        year = int(input("Which year?: "))
+        month = int(input("Which month?: "))
+        day = int(input("Which day?: "))
+
+        time_string = str(year)+"-"+str(month)+"-"+str(day)        
+        now = time.time()
+        start = get_epoch_time(time_string)
+
+        self.f.write(str(self.initial) + " " + str(time.time()) + " " + str(self.base) + " " + str(hours) + " " + str(salary) + " " + time_string)
+        self.f.close()
 
     def cal(self, salary, week_working_hours):
 
@@ -57,7 +78,8 @@ class App():
         return one_SEC_salary
 
     def get_time(self):
-        if time.time() - self.before > 0:
+
+        if time.time() - get_epoch_time(self.starter) > 0 and self.before > get_epoch_time(self.starter):
             self.base += self.single
         else:
             self.base = 0
@@ -68,7 +90,6 @@ class App():
     def main(self):
 
         self.get_time()
-        
         while 1:
             try:
                 self.root.mainloop()
@@ -78,6 +99,7 @@ class App():
                 self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n") + "2020-09-01"
                 self.f.close()
                 sys.exit(0)
+
 
     def make_decision(self):
         #TODO
