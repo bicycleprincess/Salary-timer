@@ -27,9 +27,11 @@ class App():
             self.initial = 1
         else:
             self.alist = self.first_line.split()            
-            self.initial, self.before, self.base, self.hours, self.salary, self.starter = int(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), float(self.alist[4]), str(self.alist[5])
+            self.initial, self.before, self.base, self.hours, self.salary, self.starter = \
+            int(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), float(self.alist[4]), str(self.alist[5])
             self.single = self.cal(self.salary, self.hours)
-            self.ui_window()
+            print('here')
+            self.root = self.ui_window()
 
     def ui_window(self):
 
@@ -38,6 +40,7 @@ class App():
         self.root.geometry('400x150')
         self.clock_frame = tk.Label(self.root, font=('times', 50, 'bold'), bg='black', fg='white')
         self.clock_frame.pack(fill='both', expand=1)
+        return self.root
 
     def get_days_in_month(self):
 
@@ -80,9 +83,10 @@ class App():
     def get_time(self):
 
         if time.time() - get_epoch_time(self.starter) > 0 and self.before > get_epoch_time(self.starter):
-            self.base += self.single
+            self.base = self.single * (time.time() - get_epoch_time(self.starter))
         else:
             self.base = 0
+        self.base += self.single
         self.clock_frame.config(text=("%.3f" % self.base))
         self.clock_frame.after(1000, self.get_time)
 
@@ -90,13 +94,14 @@ class App():
     def main(self):
 
         self.get_time()
+
         while 1:
             try:
                 self.root.mainloop()
             except KeyboardInterrupt:
                 self.root.quit()
                 self.f.seek(0)
-                self.f.write(str(time.time()) + " " + str(self.base) + " " + str(40) + "\n") + "2020-09-01"
+                self.f.write(str(self.initial) + " " + str(time.time()) + " " + str(self.base) + " " + str(39) + " " + str(self.salary) + " " + "2020-09-01" + "\n")
                 self.f.close()
                 sys.exit(0)
 
