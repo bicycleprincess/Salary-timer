@@ -26,11 +26,10 @@ class App():
             self.hello()
             self.initial = 1
         else:
-            self.alist = self.first_line.split()            
+            self.alist = self.first_line.split()
             self.initial, self.before, self.base, self.hours, self.salary, self.starter = \
             int(self.alist[0]), float(self.alist[1]), float(self.alist[2]), float(self.alist[3]), float(self.alist[4]), str(self.alist[5])
             self.single = self.cal(self.salary, self.hours)
-            print('here')
             self.root = self.ui_window()
 
     def ui_window(self):
@@ -101,7 +100,7 @@ class App():
             except KeyboardInterrupt:
                 self.root.quit()
                 self.f.seek(0)
-                self.f.write(str(self.initial) + " " + str(time.time()) + " " + str(self.base) + " " + str(39) + " " + str(self.salary) + " " + "2020-09-01" + "\n")
+                self.f.write(str(self.initial) + " " + str(time.time()) + " " + str(self.base) + " " + str(39) + " " + str(self.salary) + " " + "2020-09-01 ")
                 self.f.close()
                 sys.exit(0)
 
